@@ -697,6 +697,14 @@ func (m *Matrix4) MakePerspective(fov, aspect, near, far float32) *Matrix4 {
 	xmax := ymax * aspect
 	return m.MakeFrustum(xmin, xmax, ymin, ymax, near, far)
 }
+func (m *Matrix4) MakePerspectiveH(fov, aspect, near, far float32) *Matrix4 {
+
+	xmax := near * Tan(DegToRad(fov*0.5))
+	xmin := -xmax
+	ymin := xmin / aspect
+	ymax := xmax / aspect
+	return m.MakeFrustum(xmin, xmax, ymin, ymax, near, far)
+}
 
 // MakeOrthographic sets this matrix to an orthographic projection matrix
 // bounded by the specified planes.
